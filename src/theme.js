@@ -5,6 +5,8 @@ const theme = {
     primary: '#0366d6',
     barTextPrimary: '#f7f7f7',
     appBarBackground: '#24292e',
+    appBackground: '#e1e4e8',
+    containerBackground: '#f7f7f7',
   },
   fontSizes: {
     body: 14,
