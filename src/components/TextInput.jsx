@@ -13,18 +13,25 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 3,
     margin: 3,
-  }
+  },
+  errorText: {
+    borderColor: theme.colors.error,
+  },
 });
 
-// eslint-disable-next-line no-unused-vars
 const TextInput = ({ style, error, ...props }) => {
   const textInputStyle = [
     styles.inputField,
     style
   ];
 
+  const containerStyle = [
+    styles.inputContainer,
+    error && styles.errorText,
+  ];
+
   return (
-    <View style={styles.inputContainer}>
+    <View style={containerStyle}>
       <NativeTextInput style={textInputStyle} {...props} />
     </View>
   );
