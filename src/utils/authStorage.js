@@ -17,6 +17,7 @@ class AuthStorage {
       `${this.namespace}:accessToken`,
       String(accessToken)
     );
+    console.log(`setting ${accessToken}`);
   }
 
   async removeAccessToken() {
