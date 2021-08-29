@@ -14,7 +14,15 @@ const styles = StyleSheet.create({
   },
 });
 
-const AppBarTab = ({ text, path }) => {
+const AppBarTab = ({ text, path, onPress }) => {
+  if(!path) {
+    return (
+      <Pressable style={styles.tab} onPress={onPress}>
+        <Text style={styles.text}>{text}</Text>
+    </Pressable>
+    )
+  }
+
   return (
     <Pressable style={styles.tab}>
       <Link to={path}>
