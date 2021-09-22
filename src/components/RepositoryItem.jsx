@@ -71,28 +71,28 @@ const RepositoryItem = ({ repo }) => {
           />
         </View>
         <View style={styles.infoContainer}>
-          <Text style={styles.infoText} fontWeight="bold">{repo.fullName}</Text>
-          <Text color="textSecondary" style={styles.infoText}>{repo.description}</Text>
+          <Text style={styles.infoText} fontWeight="bold" testID="repoName">{repo.fullName}</Text>
+          <Text color="textSecondary" style={styles.infoText} testID="repoDescription">{repo.description}</Text>
           <View style={styles.languageContainer}>
-            <Text style={styles.languageText}>{repo.language}</Text>
+            <Text style={styles.languageText} testID="repoLanguage">{repo.language}</Text>
           </View>
         </View>
       </View>
       <View style={styles.statsContainer}>
         <View style={styles.statContainer}>
-          <Text fontWeight="bold">{roundToThousands(repo.stargazersCount)}</Text>
+          <Text fontWeight="bold" testID="repoStarCount">{roundToThousands(repo.stargazersCount)}</Text>
           <Text color="textSecondary">Stars</Text>
         </View>
         <View style={styles.statContainer}>
-          <Text fontWeight="bold">{roundToThousands(repo.forksCount)}</Text>
+          <Text fontWeight="bold" testID="repoForksCount">{roundToThousands(repo.forksCount)}</Text>
           <Text color="textSecondary">Forks</Text>
         </View>
         <View style={styles.statContainer}>
-          <Text fontWeight="bold">{roundToThousands(repo.reviewCount)}</Text>
+          <Text fontWeight="bold" testID="repoReviewCount">{roundToThousands(repo.reviewCount)}</Text>
           <Text color="textSecondary">Reviews</Text>
         </View>
         <View style={styles.statContainer}>
-          <Text fontWeight="bold">{roundToThousands(repo.ratingAverage)}</Text>
+          <Text fontWeight="bold" testID="repoRating">{roundToThousands(repo.ratingAverage)}</Text>
           <Text color="textSecondary">Rating</Text>
         </View>
       </View>
