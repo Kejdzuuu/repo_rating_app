@@ -45,10 +45,10 @@ const initialValues = {
 const SignInForm = ({ onSubmit }) => {
   return (
     <View style={styles.container}>
-      <FormikTextInput name="username" placeholder="username" />
-      <FormikTextInput name="password" placeholder="password" secureTextEntry={true} />
+      <FormikTextInput name="username" placeholder="username" testID="usernameField" />
+      <FormikTextInput name="password" placeholder="password" secureTextEntry={true} testID="passwordField" />
       <View style={styles.submitContainer}>
-        <Pressable style={styles.submitButton} onPress={onSubmit}>
+        <Pressable style={styles.submitButton} onPress={onSubmit} testID="loginButton">
             <Text fontWeight="bold" style={styles.submitButtonText}>Sign In</Text>
         </Pressable>
       </View>
@@ -56,8 +56,7 @@ const SignInForm = ({ onSubmit }) => {
   );
 };
 
-const SignIn = () => {
-  const [signIn] = useSignIn();
+export const SignInContainer = ({ signIn }) => {
   const history = useHistory();
 
   const onSubmit = async (values) => {
@@ -77,6 +76,12 @@ const SignIn = () => {
       {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
     </Formik>
   );
+}
+
+const SignIn = () => {
+  const [signIn] = useSignIn();
+
+  return <SignInContainer signIn={signIn} />
 };
 
 export default SignIn;
