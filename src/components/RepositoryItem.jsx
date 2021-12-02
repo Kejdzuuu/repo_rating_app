@@ -1,38 +1,39 @@
-import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
-import Text from './Text';
-import theme from '../theme';
+import React from "react";
+import { View, StyleSheet, Image, Button } from "react-native";
+import * as Linking from "expo-linking";
+import Text from "./Text";
+import theme from "../theme";
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.containerBackground,
-    flexDirection: 'column',
+    flexDirection: "column",
   },
   headerContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   avatarContainer: {
     padding: 10,
   },
   infoContainer: {
-    flexDirection: 'column',
+    flexDirection: "column",
     padding: 10,
     flexShrink: 1,
   },
   languageContainer: {
     borderRadius: 5,
     backgroundColor: theme.colors.primary,
-    flexDirection: 'row',
-    alignSelf: 'flex-start',
+    flexDirection: "row",
+    alignSelf: "flex-start",
     padding: 5,
   },
   statsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    flexDirection: "row",
+    justifyContent: "space-evenly",
   },
   statContainer: {
-    flexDirection: 'column',
-    alignItems: 'center',
+    flexDirection: "column",
+    alignItems: "center",
     padding: 5,
   },
   avatar: {
@@ -46,7 +47,11 @@ const styles = StyleSheet.create({
   },
   infoText: {
     paddingBottom: 8,
-  }
+  },
+  linkButtonContainer: {
+    borderRadius: 5,
+    padding: 10,
+  },
 });
 
 const roundToThousands = (number) => {
@@ -54,11 +59,15 @@ const roundToThousands = (number) => {
     return number;
   } else {
     number = (number / 1000).toFixed(1);
-    return number + 'k';
+    return number + "k";
   }
 };
 
-const RepositoryItem = ({ repo }) => {
+const RepositoryItem = ({ repo, detailView = false }) => {
+  const onButtonPress = () => {
+    Linking.openURL(repo.url);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -66,36 +75,63 @@ const RepositoryItem = ({ repo }) => {
           <Image
             style={styles.avatar}
             source={{
-              uri: repo.ownerAvatarUrl
+              uri: repo.ownerAvatarUrl,
             }}
           />
         </View>
         <View style={styles.infoContainer}>
-          <Text style={styles.infoText} fontWeight="bold" testID="repoName">{repo.fullName}</Text>
-          <Text color="textSecondary" style={styles.infoText} testID="repoDescription">{repo.description}</Text>
+          <Text style={styles.infoText} fontWeight="bold" testID="repoName">
+            {repo.fullName}
+          </Text>
+          <Text
+            color="textSecondary"
+            style={styles.infoText}
+            testID="repoDescription"
+          >
+            {repo.description}
+          </Text>
           <View style={styles.languageContainer}>
-            <Text style={styles.languageText} testID="repoLanguage">{repo.language}</Text>
+            <Text style={styles.languageText} testID="repoLanguage">
+              {repo.language}
+            </Text>
           </View>
         </View>
       </View>
       <View style={styles.statsContainer}>
         <View style={styles.statContainer}>
-          <Text fontWeight="bold" testID="repoStarCount">{roundToThousands(repo.stargazersCount)}</Text>
+          <Text fontWeight="bold" testID="repoStarCount">
+            {roundToThousands(repo.stargazersCount)}
+          </Text>
           <Text color="textSecondary">Stars</Text>
         </View>
         <View style={styles.statContainer}>
-          <Text fontWeight="bold" testID="repoForksCount">{roundToThousands(repo.forksCount)}</Text>
+          <Text fontWeight="bold" testID="repoForksCount">
+            {roundToThousands(repo.forksCount)}
+          </Text>
           <Text color="textSecondary">Forks</Text>
         </View>
         <View style={styles.statContainer}>
-          <Text fontWeight="bold" testID="repoReviewCount">{roundToThousands(repo.reviewCount)}</Text>
+          <Text fontWeight="bold" testID="repoReviewCount">
+            {roundToThousands(repo.reviewCount)}
+          </Text>
           <Text color="textSecondary">Reviews</Text>
         </View>
         <View style={styles.statContainer}>
-          <Text fontWeight="bold" testID="repoRating">{roundToThousands(repo.ratingAverage)}</Text>
+          <Text fontWeight="bold" testID="repoRating">
+            {roundToThousands(repo.ratingAverage)}
+          </Text>
           <Text color="textSecondary">Rating</Text>
         </View>
       </View>
+      {detailView && (
+        <View style={styles.linkButtonContainer}>
+          <Button
+            title="Open in Github"
+            onPress={onButtonPress}
+            color={theme.colors.primary}
+          />
+        </View>
+      )}
     </View>
   );
 };
